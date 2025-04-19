@@ -1,0 +1,116 @@
+<div class="centered-block">
+ 
+  <%- include('partials/header') %>
+  
+  
+  <section class="task-form-section">
+    <% if (errors && errors.length > 0) { %>
+      <ul class="form-errors">
+        <% errors.forEach(error => { %>
+          <li><%= error.msg || error %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+  
+    <!-- ➕ Add Task Form -->
+    <div class="card-form add-task-card">
+  
+      
+  
+      <form action="<%= editMode ? `/tasks/${editId}?_method=PUT` : '/tasks' %>" method="POST" class="add-task-form">
+        <h2><%= editMode ? 'Edit Task' : 'Add a New Task' %></h2>
+      
+      
+        <input type="text" name="title" placeholder="📝 Task title"
+          value="<%= formData?.title || '' %>"
+  
+          class="<%= errors && errors.some(e => e.msg.toLowerCase().includes('title')) ? 'input-error' : '' %>" />
+      
+        <textarea name="description" placeholder="📌 Optional description"><%= formData?.description || '' %></textarea>
+      
+      
+        <div id="form-errors" class="error-message-list" style="display: none;"></div>
+  
+        <label for="priority">📊 Priority</label>
+  <select name="priority" id="priority-select">
+    <option value="Low" <%= formData.priority === 'Low' ? 'selected' : '' %>>🟢 Low</option>
+    <option value="Medium" <%= formData.priority === 'Medium' ? 'selected' : '' %>>🟠 Medium</option>
+    <option value="High" <%= formData.priority === 'High' ? 'selected' : '' %>>🔴 High</option>
+  </select>    
+      
+        <button type="submit"><%= editMode ? '💾 Save Changes' : '➕ Add Task' %></button>
+        <% if (editMode) { %>
+          <a href="/" class="cancel-edit-btn" role="button">Cancel</a>
+        <% } %>      
+  
+        </form>
+      
+    </div>
+  </section>
+  
+  <!-- 🔍 Search Form -->
+  <div class="card-form search-card">
+    <form method="GET" action="/" class="search-form">
+      <div class="form-group">
+        <input type="text" name="search" placeholder="🔍 Search tasks..." value="<%= search %>" />
+        <button type="submit">Search</button>
+      </div>
+    </form>
+  </div>
+  </div>
+  
+  <!-- Filter Buttons -->
+  <div class="filter-buttons">
+    <a href="/?filter=all&search=<%= search %>" class="<%= filter === 'all' ? 'active' : '' %>">All</a>
+    <a href="/?filter=completed&search=<%= search %>" class="<%= filter === 'completed' ? 'active' : '' %>">Completed</a>
+    <a href="/?filter=incomplete&search=<%= search %>" class="<%= filter === 'incomplete' ? 'active' : '' %>">Incomplete</a>
+  </div>
+  
+  <section class="task-list">
+    <% if (tasks.length === 0) { %>
+      <p class="no-tasks">No tasks yet. Start by adding one above!</p>
+    <% } else { %>
+      <div class="task-grid">
+        <% tasks.forEach((task, index) => { %>
+          <div class="task-card <%= task.completed ? 'completed' : '' %>">
+            <div class="task-card-header">
+              <h3><%= index + 1 %>. <%= task.title %></h3>
+            </div>
+            <div class="task-card-body">
+              <% if (task.description) { %>
+                <p><%= task.description %></p>
+              <% } %>
+              <p class="status">Status: <%= task.completed ? '✅ Completed' : '❌ Incomplete' %></p>
+            </div>
+            <div class="task-card-actions">
+              <form action="/tasks/<%= task.id %>?_method=PATCH" method="POST">
+                <button type="submit"><%= task.completed ? '🔁 Incomplete' : '✔️ Complete' %></button>
+              </form>
+              <form action="/tasks/<%= task.id %>?_method=DELETE" method="POST">
+                <button type="submit">🗑️ Delete</button>
+              </form>        
+             
+  <span class="priority-badge <%= task.priority.toLowerCase() %>"> Priority: 
+    <%= task.priority === 'Low' ? '🟢 L' : task.priority === 'Medium' ? '🟠 M' : '🔴 H' %>
+  </span>
+  
+              <form action="/" method="GET">
+                <input type="hidden" name="edit" value="<%= task.id %>">
+                <input type="hidden" name="search" value="<%= search %>">
+                <input type="hidden" name="filter" value="<%= filter %>">
+                <button type="submit">✏️ Edit</button>
+              </form>                
+              
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </section>
+  
+  <footer class="centered-block">
+    <%- include('partials/footer') %>  
+  </footer>
+  
+  
+  

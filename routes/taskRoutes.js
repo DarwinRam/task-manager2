@@ -1,18 +1,27 @@
-import express from "express";
-const router = express.Router();
+import express from 'express';
 import {
-    renderHomePage,
-    createTask,
-    completeTask,
-    removeTask,
-} from "../controllers/taskController.js";
+  renderHomePage,
+  handleCreateTask,
+  handleToggleComplete,
+  handleDeleteTask,
+  handleUpdateTask,
+} from '../controllers/taskController.js';
 
-router.get("/", renderHomePage);
+const router = express.Router();
 
-router.post("/tasks", createTask);
+// Main page with task list and form
+router.get('/', renderHomePage);
 
-router.patch("/tasks/:id", completeTask);
+// Add new task
+router.post('/tasks', handleCreateTask);
 
-router.delete("/tasks/:id", removeTask);
+// Toggle task completion
+router.patch('/tasks/:id', handleToggleComplete);
+
+// Delete task
+router.delete('/tasks/:id', handleDeleteTask);
+
+// Update task title & description
+router.put('/tasks/:id', handleUpdateTask);
 
 export default router;

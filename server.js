@@ -1,30 +1,34 @@
-import express from "express";
-import path from "path";
-import taskRoutes from "./routes/taskRoutes.js";
+import express from 'express';
+import dotenv from 'dotenv';
+import methodOverride from 'method-override';
+import taskRoutes from './routes/taskRoutes.js';
+
+dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT || 4000;
 
+// Middleware
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(process.cwd(), "public")));
-app.set("view engine", "ejs");
-app.set("views", path.join(process.cwd(), "views"));
+app.use(express.json());
+app.use(methodOverride('_method'));
+app.use(express.static('public'));
 
-const loggingMiddleware = (req, res, next) => {
-  const timestamp = new Date().toISOString();
-  console.log(`[${timestamp}] ${req.method} ${req.url}`);
-  next();
-};
+// View engine
+app.set('view engine', 'ejs');
 
-app.use(loggingMiddleware);
+// Routes
+app.use('/', taskRoutes);
 
-// How to use the routes middleware
-app.use("/", taskRoutes);
-
+// 404 Page
 app.use((req, res) => {
-  res.status(404).send("404 Not Found.\n");
+  res.status(404).render('error', { message: 'Page Not Found' });
 });
 
-const PORT = 3000;
+// Start server
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });
+
+
+

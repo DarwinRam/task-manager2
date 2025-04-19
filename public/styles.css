@@ -1,0 +1,327 @@
+body{
+    background-color: #00B4D8
+  }
+  
+  /* Centered layout container */
+  .centered-block {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  /* Allow task cards to stay left-aligned below */
+  .task-list {
+    margin-top: 2rem;
+    padding: 0 1rem;
+  }
+  
+  
+  /* Task Grid Layout */
+  .task-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  
+  /* Task Card */
+  .task-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease;
+  }
+  
+  .task-card:hover {
+    transform: translateY(-3px);
+  }
+  
+  .task-card.completed {
+    background: #e0ffe0;
+    text-decoration: line-through;
+    opacity: 0.9;
+  }
+  
+  .task-card-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #0077ff;
+  }
+  
+  .task-card-body p {
+    margin: 0.5rem 0;
+  }
+  
+  .status {
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  
+  .task-card-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    gap: 0.5rem;
+  }
+  
+  .task-card-actions form {
+    flex: 1;
+  }
+  
+  .task-card-actions button {
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-size: 0.9rem;
+  }
+  
+  .task-card-actions form[action*="PATCH"] button {
+    background: #ffc107;
+    color: black;
+  }
+  
+  .task-card-actions form[action*="DELETE"] button {
+    background: #dc3545;
+    color: white;
+  }
+  
+  .task-card-actions button:hover {
+    opacity: 0.85;
+  }
+  
+  
+  /* Task Form Section */
+  .task-form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Card-style Forms */
+  .card-form {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Form Headings */
+  .add-task-form h2 {
+    margin-top: 0;
+    color: #0077ff;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Search Form */
+  .search-form .form-group {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .search-form input[type="text"] {
+    flex: 1;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+  
+  .search-form button {
+    background: #0077ff;
+    color: white;
+    font-weight: bold;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .search-form button:hover {
+    background: #005fd9;
+  }
+  
+  /* Add Task Form Fields */
+  .add-task-form input,
+  .add-task-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 1rem;
+  }
+  
+  .add-task-form textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  .add-task-form button {
+    background: #28a745;
+    color: white;
+    font-weight: bold;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .add-task-form button:hover {
+    background: #218838;
+  }
+  
+  h1{
+    color: black;
+  }
+  
+  .input-error {
+    border: 2px solid red;
+    background: #ffe6e6;
+  }
+  .input-error {
+    border: 2px solid #e74c3c;
+    background-color: #fff0f0;
+  }
+  
+  .error-message {
+    color: #e74c3c;
+    margin-top: 5px;
+    font-size: 0.9rem;
+  }
+  
+  .form-errors {
+    background-color: #ffdddd;
+    color: #a10000;
+    border-left: 5px solid red;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+  }
+  
+  
+  .input-error {
+    border: 2px solid red;
+  }
+  
+  #error-message-list,
+  .error-message-list {
+    margin-top: 10px;
+    color: #e74c3c;
+    font-size: 0.9rem;
+  }
+  
+  .filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .filter-buttons a {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    background: #ffffff;
+    border-radius: 8px;
+    color: #0077ff;
+    font-weight: bold;
+    border: 2px solid #0077ff;
+    transition: all 0.3s;
+  }
+  
+  .filter-buttons a:hover {
+    background-color: #0077ff;
+    color: white;
+  }
+  
+  .filter-buttons a.active {
+    background-color: #0077ff;
+    color: white;
+  }
+  .cancel-edit-btn {
+    margin-left: 1rem;
+    color: red;
+    text-decoration: underline;
+  }
+  .task-card-body .priority {
+    font-weight: bold;
+    color: #888;
+    
+  }
+  
+  .priority-select {
+    font-weight: bold;
+    color: white;
+  }
+  
+  .priority-select {
+    background-color: #0077ff;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .priority-select:hover {
+    background-color: #0056b3;
+  }
+  .priority-select:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  .priority-select option {
+    background-color: #0077ff;
+    color: white;
+  }
+  .priority-select option:hover {
+    background-color: #0056b3;
+  }
+  .priority-select option:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  .priority-select option:checked {
+    background-color: #0056b3;
+    color: white;
+  }
+  .priority-select option:checked:hover {
+    background-color: #004494;
+  }
+  .priority-select option:checked:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  /* Responsive Design */
+  
+  .priority-badge {
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 5px;
+  }
+  
+  .priority-badge.low {
+    color: #28a745; /* Green */
+  }
+  
+  .priority-badge.medium {
+    color: #ffc107; /* Yellow-Orange */
+  }
+  
+  .priority-badge.high {
+    color: #dc3545; /* Red */
+  }
+  
