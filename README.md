@@ -20,3 +20,15 @@ cd taskmanager
 npm install
 npm start
 
+## Database setup instructions
+
+Run commands:
+
+- psql --host=localhost --dbname=task_manager --username=postgres
+- #Pringles12 as password
+- SELECT * FROM tasks; to view table
+
+## Link to video
+
+
+https://drive.google.com/drive/folders/1QOfGOjVMbb7lzauzZt9mmpFkehG8mGn9?usp=drive_link
